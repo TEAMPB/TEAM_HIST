@@ -1,0 +1,21 @@
+create or replace PACKAGE TEAM_HIST AS
+
+  TYPE t_varchar_list IS TABLE OF VARCHAR2 (255);
+  c_hist_tabs t_varchar_list := t_varchar_list (
+    'HD_CUSTOMERS',
+    'HD_ORDERS',
+    'HD_ORDER_ITEMS');
+
+  PROCEDURE SET_HIST_DATE(p_date IN TIMESTAMP);
+  PROCEDURE SET_HIST_TRANSACTION(p_tsansaction_num IN number);
+  FUNCTION GET_HIST_DATE RETURN TIMESTAMP;
+  FUNCTION GET_HIST_TRANSACTION_NUM RETURN NUMBER;
+  FUNCTION GET_TRANSACTION_NUM RETURN NUMBER;
+
+  procedure GENERATE_HIST_TABLE(p_table_name in varchar2);
+  procedure GENERATE_HIST_TRIGGER(p_table_name in varchar2);
+  procedure GENERATE_HIST_VIEW(p_table_name in varchar2);
+  procedure update_hist_struct;
+
+
+END TEAM_HIST;
