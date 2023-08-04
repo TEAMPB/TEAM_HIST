@@ -141,7 +141,7 @@ begin
   
       g_transaction_id := DBMS_TRANSACTION.local_transaction_id;
       insert into hd_transaction (transaction_num,transaction_trans)
-             values (hd_transaction_seq.nextval,v('APP_PAGE_ID') || ' (' || v('APP_PAGE_ALIAS') || ')'||' - '||DBMS_TRANSACTION.local_transaction_id)
+             values (hd_transaction_seq.nextval,case when v('APP_PAGE_ID') is null then 'Background' else v('APP_PAGE_ID') || ' (' || v('APP_PAGE_ALIAS') || ')' end)
              return transaction_num into g_transaction_num;
   end if;
   return g_transaction_num;  
